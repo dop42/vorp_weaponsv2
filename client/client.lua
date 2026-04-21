@@ -21,19 +21,11 @@ local cal = false
 local modelz = false
 local next = next
 local OpenStores
-local CloseStores
 local blip
 local OpenGroup = GetRandomIntInRange(0, 0xffffff)
 
 local progressbar = exports.vorp_progressbar:initiate()
 local Core = exports.vorp_core:GetCore()
-
-RegisterNetEvent("vorp_weapons:removeallammo") -- new event
-AddEventHandler("vorp_weapons:removeallammo", function()
-	TriggerServerEvent("vorp_weapons:removeallammoserver")
-	Citizen.InvokeNative(0xF25DF915FA38C5F3, PlayerPedId(), 1, 1)
-	Citizen.InvokeNative(0x1B83C0DEEBCBB214, PlayerPedId())
-end)
 
 local function RemoveWeaponComponentFromPed(ped, componentHash, weaponHash)
 	return Citizen.InvokeNative(0x19F70C4D80494FF8, ped, componentHash, weaponHash)
@@ -339,8 +331,6 @@ AddEventHandler("onResourceStop", function(resourceName)
 		if createdobject then
 			DeleteEntity(wepobject)
 		end
-
-
 	end
 end
 )
@@ -623,8 +613,6 @@ CreateThread(function()
 			WarMenu.Button(Config.Language.total .. sum .. Config.Language.dollar)
 			WarMenu.MenuButton(Config.Language.buyselect, "confirmbuy")
 			WarMenu.MenuButton(Config.Language.exitmenu, "confirmexit")
-		
-
 		elseif WarMenu.IsMenuOpened('crafting') then
 			WarMenu.MenuButton(Config.Language.weaponcrafting, "wepcraft")
 			WarMenu.MenuButton(Config.Language.ammocrafting, "ammocraft")
